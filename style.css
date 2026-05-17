@@ -1,0 +1,221 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: #f0f2f8;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+/* ── header ── */
+header {
+  background: linear-gradient(120deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  color: #fff;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-left h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+}
+.header-left p {
+  font-size: 13px;
+  opacity: .6;
+  margin-top: 4px;
+}
+
+/* ── main ── */
+main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+/* ── info banner ── */
+.banner {
+  background: #fff;
+  border-left: 4px solid #e94560;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.6;
+}
+.banner strong { color: #1a1a2e; }
+
+/* ── KPIs ── */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.kpi {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 22px;
+  border-top: 3px solid var(--cor);
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.kpi-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.kpi-val   { font-size: 28px; font-weight: 700; color: var(--cor); }
+.kpi-desc  { font-size: 12px; color: #999; margin-top: 4px; }
+
+/* ── seções de gráficos ── */
+.secao { margin-bottom: 36px; }
+
+.secao h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.secao h2 .tag {
+  font-size: 10px;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 500;
+  letter-spacing: .5px;
+}
+.secao p { font-size: 12px; color: #888; margin-bottom: 16px; }
+
+.card-grafico {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 16px;
+}
+
+/* ── notas ── */
+.notas-section { margin-bottom: 36px; }
+.notas-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 6px; display: flex; gap: 8px; align-items: center; }
+.notas-section p  { font-size: 12px; color: #888; margin-bottom: 14px; }
+
+.nota-form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.nota-form input,
+.nota-form textarea,
+.nota-form select {
+  width: 100%;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .2s;
+  color: #1a1a2e;
+  background: #fafafa;
+}
+.nota-form input:focus,
+.nota-form textarea:focus,
+.nota-form select:focus {
+  border-color: #e94560;
+}
+.nota-form textarea { resize: vertical; min-height: 70px; }
+.nota-form .span-full { grid-column: 1 / -1; }
+
+.btn-salvar {
+  grid-column: 1 / -1;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-salvar:hover { background: #c73050; }
+
+.notas-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.nota-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  border-left: 3px solid #e94560;
+  position: relative;
+}
+.nota-card h4 { font-size: 14px; margin-bottom: 6px; }
+.nota-card p  { font-size: 12px; color: #666; line-height: 1.5; }
+.nota-card .nota-meta { font-size: 10px; color: #bbb; margin-top: 10px; }
+
+.btn-del {
+  position: absolute; top: 12px; right: 12px;
+  background: none; border: none; cursor: pointer;
+  color: #ccc; font-size: 14px; transition: color .2s;
+}
+.btn-del:hover { color: #e94560; }
+
+/* ── clima ── */
+.clima-box {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.clima-temp   { font-size: 48px; font-weight: 700; }
+.clima-cidade { font-size: 12px; opacity: .6; margin-top: 4px; }
+.clima-info   { display: flex; gap: 16px; margin-top: 12px; font-size: 13px; opacity: .8; }
+
+/* ── toast ── */
+#toast {
+  position: fixed; bottom: 20px; right: 20px;
+  background: #1a1a2e; color: #fff;
+  padding: 12px 20px; border-radius: 8px;
+  font-size: 13px; opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+#toast.show { opacity: 1; }
+
+/* ── footer ── */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  color: #aaa;
+  border-top: 1px solid #e0e0e0;
+  background: #fff;
+  margin-top: 16px;
+}
+footer a { color: #e94560; }
+
+/* ── responsivo ── */
+@media (max-width: 700px) {
+  header      { flex-direction: column; align-items: flex-start; }
+  .kpis       { grid-template-columns: 1fr 1fr; }
+  .grid-2     { grid-template-columns: 1fr; }
+  .nota-form  { grid-template-columns: 1fr; }
+}

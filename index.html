@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Olist — Trabalho ADS</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Chart.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!--CSS -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>📦 Dashboard — E-commerce Olist</h1>
+    <p>Trabalho prático · Disciplina de Desenvolvimento Web · 2º Período</p>
+  </div>
+
+  
+</header>
+
+<!--
+     CONTEÚDO PRINCIPAL
+-->
+<main>
+
+  <!-- Banner explicativo -->
+  <div class="banner">
+    <strong>Sobre o projeto:</strong> Este dashboard utiliza dados reais do
+    <strong>Olist Brazilian E-Commerce Dataset (Kaggle)</strong>, com 99.441 pedidos entre 2016 e 2018.
+    Os gráficos foram feitos com <strong>Chart.js</strong> (linha, barra e pizza).
+    As notas são salvas via <strong>Back4App (Parse REST API)</strong> e o clima vem da
+    <strong>Open-Meteo API</strong> (pública, sem chave). CSS feito na mão mesmo 😅
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi" style="--cor:#e94560">
+      <div class="kpi-label">Total de Pedidos</div>
+      <div class="kpi-val">99.441</div>
+      <div class="kpi-desc">Dataset Olist 2016–2018</div>
+    </div>
+    <div class="kpi" style="--cor:#0f3460">
+      <div class="kpi-label">Receita Total</div>
+      <div class="kpi-val">R$16,1M</div>
+      <div class="kpi-desc">Soma dos valores dos pedidos</div>
+    </div>
+    <div class="kpi" style="--cor:#f5a623">
+      <div class="kpi-label">Avaliação Média</div>
+      <div class="kpi-val">4,09 ★</div>
+      <div class="kpi-desc">96.478 reviews coletados</div>
+    </div>
+  </div>
+
+  <!-- ── GRÁFICO DE LINHA ── -->
+  <div class="secao">
+    <h2>📈 Pedidos por Mês <span class="tag">GRÁFICO DE LINHA</span></h2>
+    <p>Volume de pedidos mês a mês ao longo do dataset. Dá pra ver o crescimento em 2018.</p>
+    <div class="card-grafico">
+      <canvas id="graficoLinha" height="100"></canvas>
+    </div>
+  </div>
+
+  <!-- ── GRÁFICO DE BARRA + PIZZA ── -->
+  <div class="grid-2" style="margin-bottom:36px;">
+
+    <div class="secao" style="margin-bottom:0">
+      <h2>📊 Pedidos por Estado <span class="tag">GRÁFICO DE BARRA</span></h2>
+      <p>Top 8 estados com mais pedidos no Brasil.</p>
+      <div class="card-grafico">
+        <canvas id="graficoBarra" height="180"></canvas>
+      </div>
+    </div>
+
+    <div class="secao" style="margin-bottom:0">
+      <h2>🍕 Formas de Pagamento <span class="tag">GRÁFICO DE PIZZA</span></h2>
+      <p>Participação de cada método de pagamento.</p>
+      <div class="card-grafico">
+        <canvas id="graficoPizza" height="180"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── CLIMA (API PÚBLICA) ── -->
+  <div class="secao">
+    <h2>🌤️ Clima em São Paulo <span class="tag">API PÚBLICA — Open-Meteo</span></h2>
+    <p>Dados buscados em tempo real da Open-Meteo (gratuita, sem precisar de chave).</p>
+    <div class="clima-box" id="climaBox">
+      <div style="opacity:.6;font-size:13px;">⏳ Buscando dados do clima...</div>
+    </div>
+  </div>
+
+  <!-- ── NOTAS — CRUD Back4App ── -->
+  <div class="notas-section">
+    <h2>📝 Minhas Notas <span class="tag" style="background:#e94560">CRUD — Back4App</span></h2>
+    <p>
+      As notas são salvas/lidas/deletadas na <strong>Back4App</strong> via Parse REST API.
+      Enquanto as credenciais não forem configuradas, funciona com localStorage como fallback.
+    </p>
+
+    <!-- Formulário de criação/edição -->
+    <div class="nota-form">
+      <input type="hidden" id="editId" />
+      <input type="text" id="notaTitulo" placeholder="Título da nota (ex: Análise do Q4)" />
+      <select id="notaTipo">
+        <option value="observação">Observação</option>
+        <option value="análise">Análise</option>
+        <option value="melhoria">Melhoria</option>
+        <option value="bug">Bug</option>
+      </select>
+      <textarea id="notaTexto" class="span-full" placeholder="Escreva sua observação sobre os dados..."></textarea>
+      <button class="btn-salvar" onclick="salvarNota()">💾 Salvar Nota</button>
+    </div>
+
+
+    <div class="notas-lista" id="notasLista">
+      <div style="color:#aaa;font-size:13px;padding:8px;">Carregando notas...</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════
+     RODAPÉ
+═══════════════════════════════ -->
+<footer>
+  Trabalho de Web · Sistemas para Internet · 2º Período &nbsp;·&nbsp;
+  Dados: <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank">Olist Dataset (Kaggle)</a>
+  &nbsp;·&nbsp;
+  Clima: <a href="https://open-meteo.com" target="_blank">Open-Meteo API</a>
+  &nbsp;·&nbsp;
+  Notas: <a href="https://back4app.com" target="_blank">Back4App</a>
+</footer>
+
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
