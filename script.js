@@ -120,7 +120,7 @@ async function buscarClima() {
           </div>
         </div>
         <div style="font-size:11px;opacity:.5;text-align:right;">
-          Fonte: Open-Meteo API<br/>Gratuita · Sem chave de API
+          Fonte: Open-Meteo API<br/>Gratuita
         </div>
       </div>`;
   } catch (e) {
