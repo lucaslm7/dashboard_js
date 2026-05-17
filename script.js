@@ -140,7 +140,7 @@ const REST_KEY = 'ByjymZJzw7pTPBXrTz4jkluXSp6wj8NGjQDdkwKn';
 const URL_B4A  = 'https://parseapi.back4app.com/classes/NotasDashboard';
 
 // Detecta se o Back4App foi configurado
-const b4aAtivo = APP_ID !== '9SWFMhAcOdrXDi7MHpisuBEKLQELue6nqVHLsbdH';
+const b4aAtivo = APP_ID !== '';
 
 // Fallback: salva no localStorage do navegador 
 function notasLocal() {
