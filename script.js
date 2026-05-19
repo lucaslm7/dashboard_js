@@ -99,33 +99,45 @@ new Chart(document.getElementById('graficoPizza'), {
 async function buscarClima() {
   try {
     const url = 'https://api.open-meteo.com/v1/forecast?latitude=-23.55&longitude=-46.63&current=temperature_2m,relative_humidity_2m,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=America/Sao_Paulo&forecast_days=1';
-    const res  = await fetch(url);
+    
+    const res = await fetch(url);
     const data = await res.json();
 
-    const temp  = Math.round(data.current.temperature_2m);
-    const umid  = data.current.relative_humidity_2m;
+    const temp = Math.round(data.current.temperature_2m);
+    const umid = data.current.relative_humidity_2m;
     const vento = data.current.wind_speed_10m;
-    const max   = Math.round(data.daily.temperature_2m_max[0]);
-    const min   = Math.round(data.daily.temperature_2m_min[0]);
+    const max = Math.round(data.daily.temperature_2m_max[0]);
+    const min = Math.round(data.daily.temperature_2m_min[0]);
 
-    document.getElementById('climaBox').innerHTML = `
+    const climaBox = document.getElementById('climaBox');
+
+    climaBox.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
         <div>
-          <div class="clima-temp">${temp}°C ☁️</div>
+          <div class="clima-temp" id="temp-val"></div>
           <div class="clima-cidade">São Paulo, SP — hoje</div>
           <div class="clima-info">
-            <span>🌡️ Máx ${max}° / Mín ${min}°</span>
-            <span>💧 Umidade ${umid}%</span>
-            <span>💨 Vento ${vento} km/h</span>
+            <span id="max-min-val"></span>
+            <span id="umid-val"></span>
+            <span id="vento-val"></span>
           </div>
         </div>
         <div style="font-size:11px;opacity:.5;text-align:right;">
           Fonte: Open-Meteo API<br/>Gratuita
         </div>
-      </div>`;
+      </div>
+    `;
+
+    document.getElementById('temp-val').innerText = `${temp}°C ☁️`;
+    document.getElementById('max-min-val').innerText = `🌡️ Máx ${max}° / Mín ${min}°`;
+    document.getElementById('umid-val').innerText = `💧 Umidade ${umid}%`;
+    document.getElementById('vento-val').innerText = `💨 Vento ${vento} km/h`;
+
   } catch (e) {
-    document.getElementById('climaBox').innerHTML =
-      `<div style="opacity:.6;font-size:13px;">⚠️ Não consegui buscar o clima agora.</div>`;
+    const climaBox = document.getElementById('climaBox');
+    
+    climaBox.innerHTML = `<div style="opacity:.6;font-size:13px;" id="erro-val"></div>`;
+    document.getElementById('erro-val').innerText = '⚠️ Não consegui buscar o clima agora.';
   }
 }
 buscarClima();
